@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <!--=============== REMIX ICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="../../static/CSS/styles.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+  <title>Mohamed Rashid - Portfolio</title>
+</head>
+<body>
+
+<!--==================== HEADER ====================-->
+<header class="header" id="header">
+    <nav>
+        <ul id="navBar">
+            <li id="pages">
+                <a href="#about-me" id="about-link">
+                    <i class="ri-user-2-line"></i>
+                    About Me
+                </a>
+                <a href="#technical-skill" id="technical-link">
+                    <i class="ri-briefcase-5-line"></i>
+                    Technical Skills
+                </a>
+                <a href="#projects" id="projects-link">
+                    <i class="ri-book-shelf-line"></i>
+                    Projects
+                </a>
+                <a href="#contact-me" id="contact-link">
+                    <i class="ri-phone-line"></i>
+                    Contact Me
+                </a>
+                <button id="theme-toggle" title="Toggle theme">
+                    <i id="theme-icon" class="ri-moon-line"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+<!--==================== MAIN ====================-->
+<main class="main">
+    <!--==================== About-me ====================-->
+    <section class="about section fade-in" id="about-me">
+        <div class="container">
+            <div class="portfolio__container">
+                <!-- Left Side (Summary + Education) -->
+                <div class="left-panel">
+                    <!-- Name and Description -->
+                    <div class="name-title">
+                        <h2>Hi I'm Mohamed Rashid</h2>
+                        <h3>Software, Game, and Web Developer</h3>
+                        <div class="description">
+                            <p>
+                                Passionate developer with expertise in creating interactive web applications,
+                                innovative software solutions, and engaging game experiences.
+                                I specialize in building responsive and user-friendly interfaces
+                                that deliver exceptional user experiences.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Why Me Section -->
+                    <div class="why-section">
+                        <h2>Why Me?</h2>
+                        <h3>I'm a fast learner who thrives on picking up new technologies and applying them effectively.</h3>
+                        <div class="why-description">
+                            <p>
+                                I take initiative, figure things out, and get things done. Whether it's something I already know or something
+                                I need to learn, I always make sure to deliver exactly what's needed, when it's needed. Wherever I've worked or studied,
+                                people appreciate having me on their team — and so will you.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side (Profile Image) -->
+                <div class="right-panel">
+                    <div class="circle-container">
+                        <img src="/base/static/images/Portfolio.jpg" alt="Mohamed Rashid" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resume Button -->
+            <div class="resume-button">
+                <a href="resume.docx" download>
+                    <button class="blue-button">
+                        <span>Download Resume</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--==================== Technical ====================-->
+    <section class="technical-skill section" id="technical-skill">
+        <div class="container">
+            <!-- Section title -->
+            <h2 class="section__title" style="color: #192252; margin-bottom: 2rem; text-align: center;">Technical skills</h2>
+            <div class="categories-grid">
+                <!-- Programming Languages -->
+                <div class="category-container">
+                    <h3 class="category-title">Programming Languages</h3>
+                    <div class="skills-grid">
+                        {% for technical in technicals %}
+                        {% if technical.category == 'programming' %}
+                        <div class="skill-circle">
+                            {% if technical.image %}
+                            <img src="{{ technical.image.url }}" alt="{{ technical.title }}">
+                            {% else %}
+                            <div class="skill-text">{{ technical.title }}</div>
+                            {% endif %}
+                            <div class="tooltip">{{ technical.title }} - {{ technical.subtitle }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Frameworks and Libraries -->
+                <div class="category-container">
+                    <h3 class="category-title">Frameworks & Libraries</h3>
+                    <div class="skills-grid">
+                        {% for technical in technicals %}
+                        {% if technical.category == 'framework' %}
+                        <div class="skill-circle">
+                            {% if technical.image %}
+                            <img src="{{ technical.image.url }}" alt="{{ technical.title }}">
+                            {% else %}
+                            <div class="skill-text">{{ technical.title }}</div>
+                            {% endif %}
+                            <div class="tooltip">{{ technical.title }} - {{ technical.subtitle }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Databases -->
+                <div class="category-container">
+                    <h3 class="category-title">Databases</h3>
+                    <div class="skills-grid">
+                        {% for technical in technicals %}
+                        {% if technical.category == 'database' %}
+                        <div class="skill-circle">
+                            {% if technical.image %}
+                            <img src="{{ technical.image.url }}" alt="{{ technical.title }}">
+                            {% else %}
+                            <div class="skill-text">{{ technical.title }}</div>
+                            {% endif %}
+                            <div class="tooltip">{{ technical.title }} - {{ technical.subtitle }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Others -->
+                <div class="category-container">
+                    <h3 class="category-title">Others</h3>
+                    <div class="skills-grid">
+                        {% for technical in technicals %}
+                        {% if technical.category == 'other' %}
+                        <div class="skill-circle">
+                            {% if technical.image %}
+                            <img src="{{ technical.image.url }}" alt="{{ technical.title }}">
+                            {% else %}
+                            <div class="skill-text">{{ technical.title }}</div>
+                            {% endif %}
+                            <div class="tooltip">{{ technical.title }} - {{ technical.subtitle }}</div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--==================== Projects ====================-->
+    <section class="projects section" id="projects">
+        <div class="container">
+            <!-- Section title -->
+            <h2 class="section__title" style="color: #192252; margin-bottom: 2rem; text-align: center;">My Best Projects</h2>
+            
+            <div class="filter">
+                <i id="filterIcon" class='bx bx-filter'></i>
+                <div id="filterMenu" class="filter-menu" style="display: none;">
+                    <div class="filter-option" data-filter-type="category">Filter by Category</div>
+                    <div class="filter-option" data-filter-type="author">Filter by Author</div>
+                    <div class="filter-option" data-filter-type="availability">Filter by Availability</div>
+                    <div class="filter-option" id="clearFilter">Clear Filter</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <i class='bx bx-search'></i>
+                <input type="text" id="searchInput" name="" placeholder="Search">
+            </div>
+
+            <!-- Filter Popup -->
+            <div id="filterPopup">
+                <span id="closePopup">&times;</span>
+                <div id="filterLabel" style="margin-bottom: 5px;">Filter:</div>
+                <input type="text" id="popupInput" placeholder="Enter value" />
+                <select id="popupSelect" style="display: none;">
+                    <option value="" disabled selected>Select availability</option>
+                    <option value="available">Available</option>
+                    <option value="borrowed">Borrowed</option>
+                </select>
+                <button id="applyFilter">Apply Filter</button>
+            </div>
+
+            <div class="projects__menu">
+                {% for project in projects %}
+                <div class="project-card">
+                    <div class="carousel-inner">
+                        <img src="{{ project.thumbnail.url }}" alt="Project Screenshot for {{ project.title }}" />
+                    </div>
+
+                    <div class="project-overlay">
+                        <div class="project-header">
+                            <div class="left">
+                                <h3>{{ project.title }}</h3>
+                                <p class="author">{{ project.subtitle }}</p>
+                                <h4>{{ project.tech_stack }}</h4>
+                            </div>
+                            <div class="right">
+                                <span class="status {{ project.status }}">{{ project.get_status_display }}</span>
+                                <span class="category">{{ project.get_category_display }}</span>
+                            </div>
+                        </div>
+
+                        {% if project.download_link %}
+                        <div class="project-actions">
+                            <a href="{{ project.download_link.url }}" download class="action-button download">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+    <!--==================== Contact Me ====================-->
+    <section class="contact section" id="contact-me">
+        <div class="container">
+            <!-- Improved section header with accent line -->
+            <div class="section-header">
+                <h2 class="section__title">Contact Me</h2>
+                <div class="section-accent-line"></div>
+                <p class="section-description">
+                    Have a project in mind or want to collaborate? Feel free to reach out!
+                </p>
+            </div>
+            
+            <div class="horizontal-flex space-between">
+                <!-- Contact Info Cards with hover effects -->
+                <div class="vertical-flex contact-info-container">
+                    <!-- Email Card -->
+                    <div class="contact-card email-card">
+                        <div class="contact-icon-container">
+                            <i class="ri-mail-line"></i>
+                        </div>
+                        <div>
+                            <h3>Email</h3>
+                            <span>mohamed.Rashidwork2005@gmail.com</span>
+                            <div class="contact-link-container">
+                                <a href="mailto:mohamed.Rashidwork2005@gmail.com" class="contact-link">
+                                    Write to me <i class="ri-arrow-right-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- WhatsApp Card -->
+                    <div class="contact-card whatsapp-card">
+                        <div class="contact-icon-container whatsapp-icon">
+                            <i class="ri-whatsapp-line"></i>
+                        </div>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <span>+20 115-906-0999</span>
+                            <div class="contact-link-container">
+                                <a href="https://api.whatsapp.com/send?phone=201159060999&text=Hello, I'd like to discuss a project!" class="contact-link whatsapp-link">
+                                    Message me <i class="ri-arrow-right-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- LinkedIn Card -->
+                    <div class="contact-card linkedin-card">
+                        <div class="contact-icon-container linkedin-icon">
+                            <i class="ri-linkedin-box-line"></i>
+                        </div>
+                        <div>
+                            <h3>LinkedIn</h3>
+                            <span>mohamed-Rashid</span>
+                            <div class="contact-link-container">
+                                <a href="https://www.linkedin.com/in/mohamed-Rashid-ali/" class="contact-link linkedin-link">
+                                    Connect <i class="ri-arrow-right-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- GitHub Card -->
+                    <div class="contact-card github-card">
+                        <div class="contact-icon-container github-icon">
+                            <i class="ri-github-line"></i>
+                        </div>
+                        <div>
+                            <h3>GitHub</h3>
+                            <span>Muhammed-Rashid</span>
+                            <div class="contact-link-container">
+                                <a href="https://github.com/Muhammed-Rashid" class="contact-link github-link">
+                                    Connect <i class="ri-arrow-right-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!--==================== FOOTER ====================-->
+<footer class="footer">
+    <div class="footer__container container">
+        <div class="footer__social">
+            <a href="https://github.com/" target="_blank" class="footer__social-link">
+                <i class="ri-github-line"></i>
+            </a>
+            <a href="https://instagram.com/" target="_blank" class="footer__social-link">
+                <i class="ri-instagram-line"></i>
+            </a>
+            <a href="https://twitter.com/" target="_blank" class="footer__social-link">
+                <i class="ri-twitter-line"></i>
+            </a>
+        </div>
+
+        <span class="footer__copy">
+            © Mohamed Rashid. All rights reserved
+        </span>
+    </div>
+</footer>
+
+<!--=============== JS ===============-->
+<script src="C:\Users\moham\OneDrive\Desktop\Mohamed\Portfolio\Portfolio\base\static\JS\contactMe.js"></script>
+<script src="C:\Users\moham\OneDrive\Desktop\Mohamed\Portfolio\Portfolio\base\static\JS\filter.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+   (function(){
+      emailjs.init("service_96pvlr7"); // Add your EmailJS user ID here
+   })();
+</script>
+
+
+<script>
+    // Theme Toggle Functionality
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleButton = document.getElementById("theme-toggle");
+        const themeIcon = document.getElementById("theme-icon");
+
+        // For demo purposes, we'll use a simple variable instead of localStorage
+        // In your actual implementation, you can use localStorage
+        let currentTheme = "light"; // Default theme
+
+        // Apply initial theme
+        document.body.classList.add(`${currentTheme}-mode`);
+        updateThemeIcon(currentTheme);
+
+        // Theme toggle event listener
+        toggleButton.addEventListener("click", () => {
+            if (document.body.classList.contains("light-mode")) {
+                // Switch to dark mode
+                document.body.classList.replace("light-mode", "dark-mode");
+                currentTheme = "dark";
+                updateThemeIcon("dark");
+            } else {
+                // Switch to light mode
+                document.body.classList.replace("dark-mode", "light-mode");
+                currentTheme = "light";
+                updateThemeIcon("light");
+            }
+
+            // In your actual implementation, you would save to localStorage here:
+            // localStorage.setItem("theme", currentTheme);
+
+            console.log(`Theme switched to: ${currentTheme}`);
+        });
+
+        // Helper function to update theme icon
+        function updateThemeIcon(theme) {
+            if (theme === "dark") {
+                themeIcon.className = "ri-sun-line"; // Show sun icon in dark mode
+            } else {
+                themeIcon.className = "ri-moon-line"; // Show moon icon in light mode
+            }
+        }
+
+        // Add some visual feedback for the toggle
+        toggleButton.addEventListener("mouseenter", () => {
+            themeIcon.style.transform = "scale(1.2) rotate(15deg)";
+        });
+
+        toggleButton.addEventListener("mouseleave", () => {
+            themeIcon.style.transform = "scale(1) rotate(0deg)";
+        });
+    });
+
+    // Optional: Add keyboard support
+    document.addEventListener("keydown", function(event) {
+        // Toggle theme with Ctrl/Cmd + Shift + T
+        if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'T') {
+            event.preventDefault();
+            document.getElementById("theme-toggle").click();
+        }
+    });
+</script>
+</body>
+</html>
