@@ -92,7 +92,7 @@
             </div>
 
             <!-- Resume Button -->
-            <div class="resume-button">
+            <div class="resume-button" align= "center">
                 <a href="resume.docx" download>
                     <button class="blue-button">
                         <span>Download Resume</span>
@@ -192,33 +192,9 @@
         <div class="container">
             <!-- Section title -->
             <h2 class="section__title" style="color: #192252; margin-bottom: 2rem; text-align: center;">My Best Projects</h2>
-            
-            <div class="filter">
-                <i id="filterIcon" class='bx bx-filter'></i>
-                <div id="filterMenu" class="filter-menu" style="display: none;">
-                    <div class="filter-option" data-filter-type="category">Filter by Category</div>
-                    <div class="filter-option" data-filter-type="author">Filter by Author</div>
-                    <div class="filter-option" data-filter-type="availability">Filter by Availability</div>
-                    <div class="filter-option" id="clearFilter">Clear Filter</div>
-                </div>
-            </div>
-
             <div class="box">
                 <i class='bx bx-search'></i>
                 <input type="text" id="searchInput" name="" placeholder="Search">
-            </div>
-
-            <!-- Filter Popup -->
-            <div id="filterPopup">
-                <span id="closePopup">&times;</span>
-                <div id="filterLabel" style="margin-bottom: 5px;">Filter:</div>
-                <input type="text" id="popupInput" placeholder="Enter value" />
-                <select id="popupSelect" style="display: none;">
-                    <option value="" disabled selected>Select availability</option>
-                    <option value="available">Available</option>
-                    <option value="borrowed">Borrowed</option>
-                </select>
-                <button id="applyFilter">Apply Filter</button>
             </div>
 
             <div class="projects__menu">
@@ -241,13 +217,25 @@
                             </div>
                         </div>
 
-                        {% if project.download_link %}
                         <div class="project-actions">
-                            <a href="{{ project.download_link.url }}" download class="action-button download">
+                            {% if project.link_type == "download" and project.download_link %}
+                            <a href="{{ project.download_link.url }}" download class="action-button green-button">
                                 <i class="fas fa-download"></i> Download
                             </a>
+                            {% elif project.link_type == "github" and project.link_url %}
+                            <a href="{{ project.link_url }}" target="_blank" class="action-button gray-button">
+                                <i class="fab fa-github"></i> View on GitHub
+                            </a>
+                            {% elif project.link_type == "website" and project.link_url %}
+                            <a href="{{ project.link_url }}" target="_blank" class="action-button blue-button">
+                                <i class="fas fa-globe"></i> Visit Website
+                            </a>
+                            {% else %}
+                            <span class="action-button red-button" style="pointer-events: none; opacity: 0.6;">
+                                <i class="fas fa-times-circle"></i> Not Available
+                            </span>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -262,7 +250,6 @@
             <!-- Improved section header with accent line -->
             <div class="section-header">
                 <h2 class="section__title">Contact Me</h2>
-                <div class="section-accent-line"></div>
                 <p class="section-description">
                     Have a project in mind or want to collaborate? Feel free to reach out!
                 </p>

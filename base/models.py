@@ -14,11 +14,22 @@ class Project(models.Model):
         # Add more if needed
     ]
 
+    LINK_TYPE_CHOICES = [
+        ('download', 'Download File'),
+        ('github', 'View on GitHub'),
+        ('website', 'Visit Website'),
+        ('none', 'Not Available'),
+    ]
+
     title = models.CharField(max_length=200)
-    subtitle = models.CharField(max_length=200, null=True, blank=True)  # e.g. "Photo editing app"
-    tech_stack = models.CharField(max_length=200)  # e.g. "C++, QT"
+    subtitle = models.CharField(max_length=200, null=True, blank=True)
+    tech_stack = models.CharField(max_length=200)
     thumbnail = models.ImageField(upload_to='project_thumbnails/')
+
+    link_type = models.CharField(max_length=20, choices=LINK_TYPE_CHOICES, default='none')
     download_link = models.FileField(upload_to='project_files/', null=True, blank=True)
+    link_url = models.URLField(null=True, blank=True)  # for GitHub or website links
+
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
 

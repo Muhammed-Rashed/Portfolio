@@ -402,34 +402,30 @@ body {
     margin-bottom: 2rem;
 }
 
-.why-section {
-    background: var(--bg-color-p);
-    padding: 2rem;
-    border-radius: 20px;
-    margin-top: 3rem;
-    box-shadow: var(--shadow-medium);
-    border: 1px solid var(--border-color);
-}
-
 .why-section h2 {
-    font-size: 2rem;
-    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 700;
     margin-bottom: 1rem;
-    color: var(--text-color-p);
+    background: var(--text-color-p);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
 }
 
 .why-section h3 {
-    text-align: center;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
     color: var(--text-color-s);
+    margin-bottom: 2rem;
+    font-weight: 400;
 }
 
-.why-section p {
-    text-align: center;
-    font-weight: 500;
-    margin-bottom: 1.5rem;
+.why-description p {
+    font-size: 1.1rem;
+    text-align: left;
+    line-height: 1.8;
     color: var(--text-color-s);
+    margin-bottom: 2rem;
 }
 
 /* Profile Image */
@@ -470,7 +466,7 @@ body {
 .resume-button {
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 6rem;
 }
 /* ---------------------------- */
 
@@ -641,18 +637,6 @@ body {
     text-align: center;
     font-size: 2rem;
     font-weight: 700;
-}
-
-.section__title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #465fe9, #8b5cf6);
-    border-radius: 2px;
 }
 
 /* Categories Grid */
