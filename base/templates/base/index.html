@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -191,18 +194,47 @@
         <div class="container">
             <!-- Section title -->
             <h2 class="section__title">My Best Projects</h2>
+
+            <!-- Search & Filter -->
             <div class="box">
                 <i class='bx bx-search'></i>
-                <input type="text" id="searchInput" name="" placeholder="Search">
+                <input type="text" id="searchInput" placeholder="Search">
+                <div class="filter">
+                    <i id="filterIcon" class="ri-filter-3-line"></i>
+                    <div id="filterMenu" class="filter-menu" style="display: none;">
+                        <div data-filter-type="category">Category</div>
+                        <div data-filter-type="status">Status</div>
+                        <div data-filter-type="tech">Tech Stack</div>
+                    </div>
+                </div>
             </div>
 
+            <!-- Filter Popup -->
+            <div id="filterPopup" class="popup" style="display: none;">
+                <span id="closePopup">&times;</span>
+                <label id="filterLabel"></label>
+                <input type="text" id="popupInput" style="display:none;">
+                <select id="popupSelect" style="display:none;">
+                    <option value="">--Select--</option>
+                    <option value="software">Software</option>
+                    <option value="web">Web</option>
+                    <option value="game">Game</option>
+                    <option value="finished">Finished</option>
+                    <option value="not_finished">Not Finished</option>
+                </select>
+                <button id="applyFilter">Apply</button>
+            </div>
+            <div id="clearFilter" class="clear-filter">Clear Filter</div>
+
+            {% for category, label in grouped_categories %}
+            <h3 class="project-group-title">{{ label }}</h3>
             <div class="projects__menu">
                 {% for project in projects %}
-                <div class="project-card">
+                {% if project.category == category %}
+                <div class="project-card" data-title="{{ project.title|lower }}" data-status="{{ project.status }}" data-tech="{{ project.tech_stack|lower }}" data-category="{{ project.category }}">
                     <div class="carousel-inner">
                         <img src="{{ project.thumbnail.url }}" alt="Project Screenshot for {{ project.title }}" />
                     </div>
-
                     <div class="project-overlay">
                         <div class="project-header">
                             <div class="left">
@@ -215,13 +247,13 @@
                                 <span class="category">{{ project.get_category_display }}</span>
                             </div>
                         </div>
-
-                        <div class="project-actions">
-                            {% if project.link_type == "download" and project.download_link %}
+                        <div class="project-actions" style="flex-direction: column; align-items: center;">
+                            {% if project.download_link %}
                             <a href="{{ project.download_link.url }}" download class="action-button green-button">
                                 <i class="fas fa-download"></i> Download
                             </a>
-                            {% elif project.link_type == "github" and project.link_url %}
+                            {% endif %}
+                            {% if project.link_type == "github" and project.link_url %}
                             <a href="{{ project.link_url }}" target="_blank" class="action-button gray-button">
                                 <i class="fab fa-github"></i> View on GitHub
                             </a>
@@ -229,20 +261,21 @@
                             <a href="{{ project.link_url }}" target="_blank" class="action-button blue-button">
                                 <i class="fas fa-globe"></i> Visit Website
                             </a>
-                            {% else %}
+                            {% endif %}
+                            {% if not project.download_link and not project.link_url %}
                             <span class="action-button red-button" style="pointer-events: none; opacity: 0.6;">
-                                <i class="fas fa-times-circle"></i> Not Available
-                            </span>
+                            <i class="fas fa-times-circle"></i> Not Available
+                        </span>
                             {% endif %}
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
-
+            {% endfor %}
         </div>
     </section>
-
     <!--==================== Contact Me ====================-->
     <section class="contact section" id="contact-me">
         <div class="container">
@@ -348,78 +381,7 @@
 </footer>
 
 <!--=============== JS ===============-->
-<script src="C:\Users\moham\OneDrive\Desktop\Mohamed\Portfolio\Portfolio\base\static\JS\contactMe.js"></script>
-<script src="C:\Users\moham\OneDrive\Desktop\Mohamed\Portfolio\Portfolio\base\static\JS\filter.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-   (function(){
-      emailjs.init("service_96pvlr7"); // Add your EmailJS user ID here
-   })();
-</script>
-
-
-<script>
-    // Theme Toggle Functionality
-    document.addEventListener("DOMContentLoaded", function () {
-        const toggleButton = document.getElementById("theme-toggle");
-        const themeIcon = document.getElementById("theme-icon");
-
-        // For demo purposes, we'll use a simple variable instead of localStorage
-        // In your actual implementation, you can use localStorage
-        let currentTheme = "light"; // Default theme
-
-        // Apply initial theme
-        document.body.classList.add(`${currentTheme}-mode`);
-        updateThemeIcon(currentTheme);
-
-        // Theme toggle event listener
-        toggleButton.addEventListener("click", () => {
-            if (document.body.classList.contains("light-mode")) {
-                // Switch to dark mode
-                document.body.classList.replace("light-mode", "dark-mode");
-                currentTheme = "dark";
-                updateThemeIcon("dark");
-            } else {
-                // Switch to light mode
-                document.body.classList.replace("dark-mode", "light-mode");
-                currentTheme = "light";
-                updateThemeIcon("light");
-            }
-
-            // In your actual implementation, you would save to localStorage here:
-            // localStorage.setItem("theme", currentTheme);
-
-            console.log(`Theme switched to: ${currentTheme}`);
-        });
-
-        // Helper function to update theme icon
-        function updateThemeIcon(theme) {
-            if (theme === "dark") {
-                themeIcon.className = "ri-sun-line"; // Show sun icon in dark mode
-            } else {
-                themeIcon.className = "ri-moon-line"; // Show moon icon in light mode
-            }
-        }
-
-        // Add some visual feedback for the toggle
-        toggleButton.addEventListener("mouseenter", () => {
-            themeIcon.style.transform = "scale(1.2) rotate(15deg)";
-        });
-
-        toggleButton.addEventListener("mouseleave", () => {
-            themeIcon.style.transform = "scale(1) rotate(0deg)";
-        });
-    });
-
-    // Optional: Add keyboard support
-    document.addEventListener("keydown", function(event) {
-        // Toggle theme with Ctrl/Cmd + Shift + T
-        if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'T') {
-            event.preventDefault();
-            document.getElementById("theme-toggle").click();
-        }
-    });
-</script>
+<script src="{% static 'JS/filter.js' %}"></script>
+<script src="{% static 'JS/Light_Dark.js' %}"></script>
 </body>
 </html>

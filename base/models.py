@@ -8,9 +8,9 @@ class Project(models.Model):
     ]
 
     CATEGORY_CHOICES = [
-        ('desktop', 'Desktop App'),
-        ('web', 'Web App'),
-        ('mobile', 'Mobile App'),
+        ('software', 'Software'),
+        ('web', 'Web'),
+        ('game', 'Game'),
         # Add more if needed
     ]
 
